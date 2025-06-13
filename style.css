@@ -1,0 +1,152 @@
+body {
+    background-color: #f8f9fa;
+}
+
+/* メトロノームの拍の視覚表示 */
+.beat-circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #ccc;
+    display: inline-block;
+    transition: background-color 0.1s;
+}
+
+/* アクティブな拍の色 */
+.beat-circle.active {
+    background-color: #28a745; 
+}
+
+/* アクセント拍のスタイル */
+.beat-circle.accent { 
+    background-color: #ffc107; /* 黄色など、目立つ色 */
+    transform: scale(1.2); /* 少し大きくする */
+}
+
+/* 拍の視覚表示エリアの高さ */
+#beatVisual {
+    height: 50px; 
+}
+
+/* 再生/停止ボタン */
+.play-button {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: #00ffb3; /* 再生時の色 */
+    color: white;
+    font-size: 3rem; /* 大きめのアイコン */
+    line-height: 1; /* アイコンの縦方向調整 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+ /* ホバー時の色 */
+.play-button:hover {
+    background-color: #ff5f5f;
+    transform: scale(1.05);
+}
+
+.play-button:active {
+    transform: scale(0.98);
+}
+
+
+/* --- オフキャンバス関連のカスタムスタイル --- */
+
+
+.offcanvas.text-bg-info {
+    background-color: #5bc0de !important;
+    color: #0c4128 !important; 
+}
+
+/* オフキャンバスヘッダー内のタイトルと閉じるボタンの配置調整 */
+.offcanvas-header {
+    display: flex; /* flexboxを使って子要素を配置 */
+    justify-content: space-between; /* タイトルと閉じるボタンを両端揃え */
+    align-items: center; /* 垂直方向中央揃え */
+    width: 100%; /* 親要素の幅いっぱいに */
+    padding-right: 1rem; /* 閉じるボタンが右端に寄りすぎないように余白 */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* ヘッダーの下に境界線 */
+}
+
+.offcanvas-header .offcanvas-title {
+    flex-grow: 1; /* タイトルが利用可能なスペースを占めるように */
+    margin-right: 1rem; /* タイトルと閉じるボタンの間に余白 */
+    white-space: nowrap; /* テキストの折り返しを防ぐ */
+    overflow: hidden; /* はみ出したテキストを隠す */
+    text-overflow: ellipsis; /* はみ出したテキストを...で表示 */
+}
+
+
+/* 大きい画面（md以上）でのレイアウトとオフキャンバスの常時表示 */
+@media (min-width: 768px) {
+    /* bodyをFlexboxコンテナにして、オフキャンバスとメインコンテンツを横並びにする */
+    body {
+        display: flex;
+        flex-direction: row;
+        min-height: 100vh; /* 画面全体の高さを確保 */
+        overflow-x: hidden; /* 横スクロールバーが出ないように */
+    }
+
+    /* オフキャンバスをサイドバーのように表示 */
+    .offcanvas {
+        position: fixed; 
+        top: 0;
+        left: 0;
+        height: auto; /* コンテンツに合わせて高さを自動調整 */
+        width: 300px; /* オフキャンバスの幅を固定 */
+        border-right: 1px solid rgba(0, 0, 0, 0.2); /* メインコンテンツとの区切り線 */
+        /* 背景色は .offcanvas.text-bg-info ルールに任せる */
+        transform: translateX(0) !important; /* 開閉アニメーションを無効化し、常に表示位置に */
+        visibility: visible !important; /* 常に可視にする */
+        /* transition: none !important; /* アニメーションも無効化 (オプション) */
+    }
+
+    /* 大きい画面では、オフキャンバスの背景オーバーレイを非表示 */
+    /*.offcanvas-backdrop {
+        display: none !important;
+    }
+
+    /* メインコンテンツエリアがオフキャンバスの隣に配置されるように調整 */
+    .container-fluid {
+        flex-grow: 1; /* 残りのスペースを全て占める */
+        padding-left: 1rem; /* オフキャンバスの幅があるので、必要に応じて調整 */
+        margin-left: 0; /* 大きい画面では中央寄せを解除 */
+        margin-right: 0;
+    }
+
+    /* 大きい画面の場合、モバイル用のハンバーガーメニューを非表示にする */
+    .btn.d-md-none {
+        display: none !important;
+    }
+
+    /* 大きい画面の場合、オフキャンバス内の閉じるボタンを非表示にする */
+    .offcanvas-header .btn-close {
+        display: none !important;
+    }
+}
+
+/* 小さい画面（md未満）の場合のスタイル */
+@media (max-width: 767.98px) {
+    .offcanvas {
+         width: 75vw; /* 画面幅の75%など、適度な幅に調整することも検討 */
+         max-width: 300px; /* 最大幅を設定 */
+    }
+
+    /* 小さい画面では、大きい画面用のトグルボタンを非表示にする */
+    #toggleSettingsBtn {
+        display: none !important;
+    }
+
+    /* メインコンテンツが中央に来るように（小さい画面のデフォルト） */
+    .container-fluid {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}

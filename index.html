@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>メトロノーム</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" /> </head>
+<body>
+    <div class="offcanvas offcanvas-start text-bg-info" tabindex="-1" id="offcanvasCustomSettings" aria-labelledby="offcanvasCustomSettingsLabel" data-bs-scroll="true">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasCustomSettingsLabel">カスタム設定</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="mb-3">
+                <label for="timeSignatureBeats" class="form-label">拍子 (分子)</label>
+                <input type="number" id="timeSignatureBeats" class="form-control" value="4" min="1" />
+            </div>
+            <div class="mb-3">
+                <label for="timeSignatureNote" class="form-label">拍子 (分母)</label>
+                <input type="number" id="timeSignatureNote" class="form-control" value="4" min="1" step="any" />
+            </div>
+
+            <div class="mb-3">
+                <label for="soundSelect" class="form-label">サウンド</label>
+                <select id="soundSelect" class="form-select">
+                    <option value="click1">クリック1</option>
+                    <option value="click2">クリック2</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="subdivision" class="form-label">補助リズム</label>
+                <select id="subdivision" class="form-select">
+                    <option value="none">なし</option>
+                    <option value="triplet">三連符</option>
+                    <option value="dotted">付点</option>
+                    <option value="offbeat">裏打ち</option>
+                    <option value="2beat">2ビート</option>
+                    <option value="8beat">8ビート</option>
+                    <option value="16beat">16ビート</option>
+                    <option value="swing">Swing</option>
+                    <option value="shuffle">shuffle</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="bpmStep" class="form-label">BPM上昇ステップ</label>
+                <input type="number" id="bpmStep" class="form-control" value="5" />
+            </div>
+
+            <div class="mb-3">
+                <label for="bpmStepEveryMeasure" class="form-label">何小節ごと？</label>
+                <input type="number" id="bpmStepEveryMeasure" class="form-control" value="0" />
+            </div>
+
+            <div class="mb-3">
+                <label for="bpmStepEverySeconds" class="form-label">何秒ごと？</label>
+                <input type="number" id="bpmStepEverySeconds" class="form-control" value="0" />
+            </div>
+
+            <div class="d-grid mt-4">
+                <button id="saveSettingsBtn" class="btn btn-warning">設定を保存</button>
+            </div>
+
+            <div class="form-check mt-3">
+                <input class="form-check-input" type="checkbox" id="accentFirstBeat">
+                <label class="form-check-label text-white" for="accentFirstBeat">
+                    一拍目にアクセントをつける
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 p-5 text-center">
+                <button class="btn btn-primary d-md-none position-fixed top-0 start-0 m-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCustomSettings" aria-controls="offcanvasCustomSettings">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <button id="toggleSettingsBtn" class="btn btn-info d-none d-md-block position-fixed top-0 start-0 m-3" type="button">
+                    <span class="navbar-toggler-icon"></span> カスタム設定
+                </button>
+
+                <h1 class="mb-4">メトロノーム</h1>
+
+                <div class="bpm-display mb-3">
+                    <button id="bpmMinus" class="btn btn-outline-dark me-2">－</button>
+                    <span id="bpmValue" class="bpm-number display-4 fw-bold">100</span>
+                    <button id="bpmPlus" class="btn btn-outline-dark ms-2">＋</button>
+                </div>
+
+                <input type="range" id="bpmSlider" min="40" max="300" value="100" class="form-range w-50 mx-auto mb-4">
+
+                <div class="d-flex justify-content-center mb-4">
+                    <button id="startStopBtn" class="play-button">▶</button>
+                </div>
+
+                <div id="beatVisual" class="mt-5 d-flex justify-content-center gap-3"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
